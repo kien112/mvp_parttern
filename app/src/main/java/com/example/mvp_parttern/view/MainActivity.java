@@ -26,8 +26,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements EmployeeView{
 
-    AppDatabase db;
-    EmployeeDAO dao;
+//    AppDatabase db;
     EmployeePresenter employeePresenter;
     TextView tv_id_message, tv_full_name_message, tv_hire_date_message, tv_salary_message;
     EditText edt_id, edt_full_name, edt_hire_date, edt_salary;
@@ -40,9 +39,8 @@ public class MainActivity extends AppCompatActivity implements EmployeeView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "dbEmployees").allowMainThreadQueries().build();
-        dao = db.employeeDAO();
+//        db = Room.databaseBuilder(getApplicationContext(),
+//                AppDatabase.class, "dbEmployees").allowMainThreadQueries().build();
 
         tv_id_message = findViewById(R.id.tv_id_message);
         tv_full_name_message = findViewById(R.id.tv_full_name_message);
@@ -58,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements EmployeeView{
         btn_edit = findViewById(R.id.btn_edit);
         btn_delete = findViewById(R.id.btn_delete);
 
-        employeePresenter = new EmployeePresenter(dao, this);
+        employeePresenter = new EmployeePresenter(getApplicationContext(), this);
         employeePresenter.showEmployeeList(null, null, null, null);
 
         btn_add.setOnClickListener(new View.OnClickListener() {

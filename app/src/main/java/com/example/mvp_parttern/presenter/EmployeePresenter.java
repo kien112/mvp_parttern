@@ -1,5 +1,10 @@
 package com.example.mvp_parttern.presenter;
 
+import android.content.Context;
+
+import androidx.room.Room;
+
+import com.example.mvp_parttern.model.AppDatabase;
 import com.example.mvp_parttern.model.Employee;
 import com.example.mvp_parttern.model.EmployeeDAO;
 import com.example.mvp_parttern.view.EmployeeView;
@@ -18,8 +23,10 @@ public class EmployeePresenter {
     EmployeeView employeeView;
     Boolean isValidData = true;
 
-    public EmployeePresenter(EmployeeDAO employeeDAO, EmployeeView employeeView) {
-        this.employeeDAO = employeeDAO;
+    public EmployeePresenter(Context context, EmployeeView employeeView) {
+        AppDatabase db = Room.databaseBuilder(context,
+                AppDatabase.class, "dbEmployees").allowMainThreadQueries().build();
+        employeeDAO = db.employeeDAO();
         this.employeeView = employeeView;
     }
 
